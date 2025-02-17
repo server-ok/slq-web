@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+    <h1 id="headurrs">blank</h1>
+    </main>
+    <footer></footer>
+  </body>
+
+  <script>
+    async function getData() {
+    const url = "http://eu.httpbin.org/headers";
+    try {
+      const response = await fetch(url, {referrerPolicy: "unsafe-url"});
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      document.getElementById("headurrs").textContent=JSON.stringify(json);
+      console.log(json);
+    } catch (error) {
+      console.error(error.message);
+      document.getElementById("headurrs").textContent=`Error: ${error.message}`;
+    }
+  }
+  const interval = setInterval(function() {
+   getData();
+  }, 5000);
+  </script>
+
+</html>
